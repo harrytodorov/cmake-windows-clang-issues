@@ -1,0 +1,1 @@
+The repository is based on [cmake-windows-export-all-issue](https://github.com/willyd/cmake-windows-export-all-issue) by GitHub user [willyd](https://github.com/willyd).
