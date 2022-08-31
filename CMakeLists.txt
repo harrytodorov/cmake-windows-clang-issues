@@ -1,19 +1,10 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.18)
+project(cmake_export_all_symbols CXX CUDA)
 
-project(cmake_export_all_symbols)
-
-option(BUILD_SHARED_LIBS "Build a DLL" ON)
-
-find_package(CUDA REQUIRED)
-
-
-cuda_add_library(lib lib.h lib.cpp lib.cu)
-if(BUILD_SHARED_LIBS)
-    set_target_properties(lib PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
-endif()
-
-include_directories(${CUDA_INCLUDE_DIRECTORIES})
+add_library(lib SHARED lib.h lib.cpp lib.cu)
+set_target_properties(lib PROPERTIES
+        WINDOWS_EXPORT_ALL_SYMBOLS ON
+        CUDA_ARCHITECTURES 52)
 
 add_executable(libtest main.cpp)
-
 target_link_libraries(libtest lib)
